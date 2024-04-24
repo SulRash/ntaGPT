@@ -5,7 +5,7 @@ eval_interval = 5
 eval_iters = 40
 wandb_log = False # feel free to turn on
 wandb_project = 'ntagent'
-wandb_run_name = 'ft-' + str(time.time())
+wandb_run_name = 'ntagent-ft-frozenlake-' + str(time.time())
 
 dataset = 'frozenlake'
 init_from = 'out-baby-ntagent-frozenlake' # this is the largest GPT-2 model
