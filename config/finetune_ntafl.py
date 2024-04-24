@@ -11,11 +11,11 @@ init_from="resume"
 # these make the total batch size be ~0.5M
 # 12 batch size * 1024 block size * 5 gradaccum * 8 GPUs = 491,520
 batch_size = 4
-block_size = 512
+block_size = 1024
 gradient_accumulation_steps = 1
 
-# this makes total number of tokens be 300B
-max_iters = 200000
+# 6858 is one epoch for 28,090,488 tokens of training data
+max_iters = 6858
 
 # eval stuff
 eval_interval = 1000
