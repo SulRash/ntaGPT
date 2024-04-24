@@ -31,7 +31,7 @@ def tokenizer(string: str):
     string = string.replace("H", MTT["H"])
     return list(map(int, list(string)))
 
-def detokenizer(ids: List[int]):
+def detokenizer(ids):
     ''.join([TTM[i] for i in ids])
 
 # Use the pretraining data
