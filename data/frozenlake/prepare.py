@@ -5,7 +5,7 @@ import numpy as np
 from data.frozen_lake_data import tokenizer, detokenizer
 
 # Use the pretraining data
-input_file_path = os.path.join(os.path.dirname(__file__), '/Users/sultan/Documents/Github/RLALLM/data/generated_data/pt_data.txt')
+input_file_path = '/Users/sultan/Documents/Github/RLALLM/data/generated_data/pt_data.txt'
 
 # Use the finetuning data
 # input_file_path = os.path.join(os.path.dirname(__file__), '/Users/sultan/Documents/Github/RLALLM/data/generated_data/ft_data.txt')
