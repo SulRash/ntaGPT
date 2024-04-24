@@ -28,8 +28,12 @@ gradient_accumulation_steps = 1
 # lr_decay_iters = 18237 * 2
 
 # Big Boy Run 3:
-max_iters = 19000
-lr_decay_iters = 19000
+# max_iters = 19000
+# lr_decay_iters = 19000
+
+# Big Boy Run 4:
+max_iters = 190000
+lr_decay_iters = 190000
 
 # eval stuff
 eval_interval = 1000

@@ -18,7 +18,9 @@ gradient_accumulation_steps = 1
 # Big Boy Run 1:
 # max_iters = 6858 + 18000
 # Big Boy Run 3:
-max_iters = 6858 + 19000
+# max_iters = 6858 + 19000
+# Big Boy Run 4:
+max_iters = 68580 + 190000
 
 # eval stuff
 eval_interval = 1000
@@ -28,7 +30,7 @@ log_interval = 10
 # finetune at constant LR
 # Big Boy Run 1:
 # learning_rate = 3e-5
-# Big Boy Run 3:
+# Big Boy Run 3 and 4:
 learning_rate = 6e-5
 
 decay_lr = False
