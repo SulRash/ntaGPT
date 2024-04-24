@@ -34,7 +34,7 @@ def tokenizer(string: str):
 def detokenizer(ids):
     ''.join([TTM[i] for i in ids])
 
-input_file_path = '/home/sultan/Documents/GitHub/NTA/data/generated_data/pt_data.txt'
+input_file_path = '/eph/nvme0/azureml/cr/j/b6c56e26dc294900ab4fe668a5e1b6f7/exe/wd/NTA/data/generated_data/pt_data.txt'
 
 with open(input_file_path, 'r') as f:
     data = f.read()
