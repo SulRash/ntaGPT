@@ -5,7 +5,7 @@ wandb_log = True
 wandb_project = 'ntagent'
 
 # wandb_run_name='ntagent-fl-'+str(time.time())
-wandb_run_name='ntagent-fl-bbr2-'+str(time.time())
+wandb_run_name='ntagent-fl-bbr3-'+str(time.time())
 
 # Big Boy Run 1:
 # dataset = 'frozenlake_pt'
@@ -24,8 +24,12 @@ gradient_accumulation_steps = 1
 # lr_decay_iters = 18237
 
 # Big Boy Run 2:
-max_iters = 6858 * 2
-lr_decay_iters = 18237 * 2
+# max_iters = 6858 * 2
+# lr_decay_iters = 18237 * 2
+
+# Big Boy Run 3:
+max_iters = 19000
+lr_decay_iters = 19000
 
 # eval stuff
 eval_interval = 1000
