@@ -5,8 +5,39 @@ import os
 import pickle
 from contextlib import nullcontext
 import torch
-import tiktoken
 from model import GPTConfig, GPT
+
+MTT = {
+    "S": "3",
+    "G": "4",
+    "F": "5",
+    "H": "6"
+}
+
+TTM = {
+    0: "<eor>",
+    1: "<eom>",
+    2: "\n",
+    3: "S",
+    4: "G",
+    5: "F",
+    6: "H"
+}
+
+def tokenizer(string: str):
+    string = string.replace("<eor>", "0")
+    string = string.replace("<eom>", "1")
+    string = string.replace("\n", "2")
+    string = string.replace("S", MTT["S"])
+    string = string.replace("G", MTT["G"])
+    string = string.replace("F", MTT["F"])
+    string = string.replace("H", MTT["H"])
+    return list(map(int, list(string)))
+
+def detokenizer(ids):
+    ids = ids.tolist()[0]
+    output = ''.join([TTM[i] for i in ids])
+    return output
 
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
@@ -20,6 +51,8 @@ seed = 1337
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', etc.
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32' or 'bfloat16' or 'float16'
 compile = False # use PyTorch 2.0 to compile the model to be faster
+task = 'frozenlake'
+map_size = 6
 exec(open('configurator.py').read()) # overrides from command line or config file
 # -----------------------------------------------------------------------------
 
@@ -58,20 +91,10 @@ load_meta = False
 if init_from == 'resume' and 'config' in checkpoint and 'dataset' in checkpoint['config']: # older checkpoints might not have these...
     meta_path = os.path.join('data', checkpoint['config']['dataset'], 'meta.pkl')
     load_meta = os.path.exists(meta_path)
-if load_meta:
-    print(f"Loading meta from {meta_path}...")
-    with open(meta_path, 'rb') as f:
-        meta = pickle.load(f)
-    # TODO want to make this more general to arbitrary encoder/decoder schemes
-    stoi, itos = meta['stoi'], meta['itos']
-    encode = lambda s: [stoi[c] for c in s]
-    decode = lambda l: ''.join([itos[i] for i in l])
-else:
-    # ok let's assume gpt-2 encodings by default
-    print("No meta.pkl found, assuming GPT-2 encodings...")
-    enc = tiktoken.get_encoding("gpt2")
-    encode = lambda s: enc.encode(s, allowed_special={"<|endoftext|>"})
-    decode = lambda l: enc.decode(l)
+if task == 'frozenlake':
+    print("Loading frozenlake tokenizer/detokenizer")
+    encode = tokenizer
+    decode = detokenizer
 
 # encode the beginning of the prompt
 if start.startswith('FILE:'):
@@ -85,5 +108,5 @@ with torch.no_grad():
     with ctx:
         for k in range(num_samples):
             y = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
-            print(decode(y[0].tolist()))
+            print(decode(y))
             print('---------------')
