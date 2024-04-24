@@ -12,7 +12,7 @@ wandb_log = False # override via command line if you like
 wandb_project = 'ntagent'
 wandb_run_name = 'baby-ntagent-fl-'+str(time.time())
 
-dataset = 'frozenlake'
+dataset = 'frozenlake_pt'
 gradient_accumulation_steps = 1
 batch_size = 64
 block_size = 256 # context of up to 256 previous characters
@@ -32,5 +32,5 @@ beta2 = 0.99 # make a bit bigger because number of tokens per iter is small
 warmup_iters = 100 # not super necessary potentially
 
 # on macbook also add
-device = 'mps'  # run on cpu only
-compile = False # do not torch compile the model
+device = 'cuda'  # run on cpu only
+compile = True # do not torch compile the model
