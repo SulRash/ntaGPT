@@ -5,7 +5,7 @@ wandb_log = True
 wandb_project = 'ntagent'
 wandb_run_name='ntagent-fl-ft-bbr3'+str(time.time())
 
-dataset = 'frozenlake_pt'
+dataset = 'frozenlake_ft'
 init_from="resume"
 
 # these make the total batch size be ~0.5M
