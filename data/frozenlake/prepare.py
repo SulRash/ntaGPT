@@ -66,9 +66,7 @@ val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
 
 # save the meta information as well, to help us encode/decode later
 meta = {
-    'vocab_size': vocab_size,
-    'tokenizer': tokenizer,
-    'detokenizer': detokenizer,
+    'vocab_size': vocab_size
 }
 with open(os.path.join(os.path.dirname(__file__), 'meta.pkl'), 'wb') as f:
     pickle.dump(meta, f)
