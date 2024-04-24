@@ -3,7 +3,7 @@ import time
 out_dir = 'out-ntagent-frozenlake'
 wandb_log = True
 wandb_project = 'ntagent'
-wandb_run_name='ntagent-fl-'+str(time.time())
+wandb_run_name='ntagent-fl-ft-'+str(time.time())
 
 dataset = 'frozenlake_pt'
 init_from="resume"
@@ -15,7 +15,7 @@ block_size = 1024
 gradient_accumulation_steps = 1
 
 # 6858 is one epoch for 28,090,488 tokens of training data
-max_iters = 6858
+max_iters = 6858 + 18000
 
 # eval stuff
 eval_interval = 1000
