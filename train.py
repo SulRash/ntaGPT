@@ -44,7 +44,11 @@ wandb_log = False # disabled by default
 wandb_project = 'ntagent'
 wandb_run_name = 'ntagent-default'+str(time.time()) # 'run' + str(time.time())
 # data
-dataset = 'frozenlake'
+mode = 'pretrain'
+if mode == 'pretrain':
+    dataset = 'frozenlake_pt'
+else:
+    dataset = 'frozenlake_ft'
 gradient_accumulation_steps = 5 * 8 # used to simulate larger batch sizes
 batch_size = 12 # if gradient_accumulation_steps > 1, this is the micro-batch size
 block_size = 1024
@@ -176,8 +180,11 @@ elif init_from == 'resume':
         if k.startswith(unwanted_prefix):
             state_dict[k[len(unwanted_prefix):]] = state_dict.pop(k)
     model.load_state_dict(state_dict)
-    iter_num = checkpoint['iter_num']
-    best_val_loss = checkpoint['best_val_loss']
+    if mode == 'pretrain':
+        iter_num = checkpoint['iter_num']
+        best_val_loss = checkpoint['best_val_loss']
+    else:
+        iter_num = 0
 elif init_from.startswith('gpt2'):
     print(f"Initializing from OpenAI GPT-2 weights: {init_from}")
     # initialize from OpenAI GPT-2 weights
@@ -197,7 +204,7 @@ scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
 
 # optimizer
 optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2), device_type)
-if init_from == 'resume':
+if init_from == 'resume' and mode == 'pretrain':
     optimizer.load_state_dict(checkpoint['optimizer'])
 checkpoint = None # free up memory
 
