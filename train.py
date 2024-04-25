@@ -83,6 +83,11 @@ with open(sys.argv[1]) as stream:
     except yaml.YAMLError as exc:
         print(exc)
 globals().update(config)
+mode = sys.argv[2]
+if mode == 'pt':
+    globals().update(config['pt'])
+else:
+    globals().update(config['ft'])
 # -----------------------------------------------------------------------------
 
 # various inits, derived attributes, I/O setup
