@@ -33,7 +33,7 @@ wandb_run_name = 'medium-ntagent-fl-ft-r1-'+str(time.time())
 init_from = 'resume'
 mode = 'finetune'
 
-dataset = 'frozenlake_pt'
+dataset = 'frozenlake_ft'
 gradient_accumulation_steps = 1
 batch_size = 64
 
