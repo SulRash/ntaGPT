@@ -6,7 +6,7 @@ from contextlib import nullcontext
 import torch
 from model import GPTConfig, GPT
 
-from utils.frozenlake import tokenizer, detokenizer
+from data.frozenlake.tokenizer import tokenizer, detokenizer
 
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')

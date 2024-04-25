@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 from argparse import ArgumentParser
 
-from utils.frozenlake import tokenizer
+from tokenizer import tokenizer
 
 parser = ArgumentParser()
 parser.add_argument('--data_path', type=str)
