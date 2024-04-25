@@ -1,6 +1,7 @@
 import os
 import pickle
 import numpy as np
+from argparse import ArgumentParser
 
 # Map-to-Token to avoid the tokenization step.
 # 0, 1, and 2 are reserved for <eor>, <eom>, and \n respectively
@@ -34,7 +35,12 @@ def tokenizer(string: str):
 def detokenizer(ids):
     ''.join([TTM[i] for i in ids])
 
-input_file_path = '/eph/nvme0/azureml/cr/j/b6c56e26dc294900ab4fe668a5e1b6f7/exe/wd/NTA/data/generated_data/pt_data.txt'
+parser = ArgumentParser()
+parser.add_argument('--data_path', type=str)
+parser.add_argument('--mode', type=str, choices=['pt', 'ft'])
+args = parser.parse_args()
+
+input_file_path = args.data_path
 
 with open(input_file_path, 'r') as f:
     data = f.read()
@@ -57,12 +63,12 @@ print(f"val has {len(val_ids):,} tokens")
 # export to bin files
 train_ids = np.array(train_ids, dtype=np.uint16)
 val_ids = np.array(val_ids, dtype=np.uint16)
-train_ids.tofile(os.path.join(os.path.dirname(__file__), 'train.bin'))
-val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
+train_ids.tofile(os.path.join(os.path.dirname(__file__), f'train_{args.mode}.bin'))
+val_ids.tofile(os.path.join(os.path.dirname(__file__), f'val_{args.mode}.bin'))
 
 # save the meta information as well, to help us encode/decode later
 meta = {
     'vocab_size': vocab_size
 }
-with open(os.path.join(os.path.dirname(__file__), 'meta.pkl'), 'wb') as f:
+with open(os.path.join(os.path.dirname(__file__), f'meta_{args.mode}.pkl'), 'wb') as f:
     pickle.dump(meta, f)
