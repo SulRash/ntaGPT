@@ -35,7 +35,7 @@ iters: 50
 # Wandb
 wandb_log: True
 wandb_project: ntagent
-wandb_run_name: mediumgpt-fl-r1
+wandb_run_name: smallgpt-fl-r1
 
 # Data
 pt_maps: 100000000

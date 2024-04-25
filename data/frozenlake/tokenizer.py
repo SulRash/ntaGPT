@@ -25,6 +25,16 @@ def tokenizer(string: str):
     string = string.replace("G", MTT["G"])
     string = string.replace("F", MTT["F"])
     string = string.replace("H", MTT["H"])
+
+    # These just clean up loose ends
+    # that sometimes happens with finetuning data gen
+    # TODO: Fix finetuning data generation.
+    string = string.replace("<", '')
+    string = string.replace("e", '')
+    string = string.replace("o", '')
+    string = string.replace("m", '')
+    string = string.replace("r", '')
+    string = string.replace(">", '')
     return list(map(int, list(string)))
 
 def detokenizer(ids):

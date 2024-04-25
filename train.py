@@ -103,6 +103,8 @@ if epochs and dataset == 'frozenlake':
         max_iters =  ((map_size + 2) * map_size * ft_maps) // (batch_size * block_size)
         max_iters = max_iters * epochs
 
+print(f"Iterations: {max_iters}")
+
 # various inits, derived attributes, I/O setup
 ddp = int(os.environ.get('RANK', -1)) != -1 # is this a ddp run?
 if ddp:
