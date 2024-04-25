@@ -1,9 +1,9 @@
 # Model 
 block_size: 2048
 vocab_size: 7
-n_layer: 24
-n_head: 16
-n_embd: 1024
+n_layer: 12
+n_head: 12
+n_embd: 768
 
 # Training
 pt:
@@ -16,7 +16,6 @@ pt:
   weight_decay: 0.1
   device: cuda
   compile: True
-  epoch: -1
 
 ft:  
   batch_size: 8
@@ -27,7 +26,6 @@ ft:
   weight_decay: 0.1
   device: cuda
   compile: True
-  epoch: -1
 
 # Eval
 eval_interval: 1000
@@ -35,7 +33,7 @@ log_interval: 10
 iters: 50
 
 # Wandb
-wandb_log: False
+wandb_log: True
 wandb_project: ntagent
 wandb_run_name: mediumgpt-fl-r1
 
