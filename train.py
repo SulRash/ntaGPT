@@ -78,6 +78,10 @@ compile = True # use PyTorch 2.0 to compile the model to be faster
 import yaml
 import sys
 
+map_size = None
+pt_maps = None
+ft_maps = None
+
 with open(sys.argv[1]) as stream:
     try:
         config = yaml.safe_load(stream)
@@ -85,9 +89,6 @@ with open(sys.argv[1]) as stream:
         print(exc)
 globals().update(config)
 mode = sys.argv[2]
-map_size = None
-pt_maps = None
-ft_maps = None
 if mode == 'pt':
     globals().update(config['pt'])
 else:
@@ -97,6 +98,9 @@ else:
 if epochs and dataset == 'frozenlake':
     if mode == 'pt':
         max_iters =  ((map_size + 2) * map_size * pt_maps) // (batch_size * block_size)
+        max_iters = max_iters * epochs
+    elif mode == 'ft':
+        max_iters =  ((map_size + 2) * map_size * ft_maps) // (batch_size * block_size)
         max_iters = max_iters * epochs
 
 # various inits, derived attributes, I/O setup

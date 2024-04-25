@@ -14,4 +14,4 @@ python data/frozenlake/prepare.py \
 rm -rf generated_data
 
 python train.py config/run_A.yaml pt
-python train.py config/run_A.yaml ft
+# python train.py config/run_A.yaml ft
