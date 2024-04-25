@@ -58,6 +58,7 @@ bias = False # do we use bias inside LayerNorm and Linear layers?
 # adamw optimizer
 learning_rate = 6e-4 # max learning rate
 max_iters = 600000 # total number of training iterations
+epochs = False # Run training in epochs instead of iterations
 weight_decay = 1e-1
 beta1 = 0.9
 beta2 = 0.95
@@ -84,11 +85,19 @@ with open(sys.argv[1]) as stream:
         print(exc)
 globals().update(config)
 mode = sys.argv[2]
+map_size = None
+pt_maps = None
+ft_maps = None
 if mode == 'pt':
     globals().update(config['pt'])
 else:
     globals().update(config['ft'])
 # -----------------------------------------------------------------------------
+
+if epochs and dataset == 'frozenlake':
+    if mode == 'pt':
+        max_iters =  ((map_size + 2) * map_size * pt_maps) // (batch_size * block_size)
+        max_iters = max_iters * epochs
 
 # various inits, derived attributes, I/O setup
 ddp = int(os.environ.get('RANK', -1)) != -1 # is this a ddp run?
