@@ -35,7 +35,7 @@ wandb_run_name = 'medium-ntagent-fl-r1-'+str(time.time())
 
 dataset = 'frozenlake_pt'
 gradient_accumulation_steps = 1
-batch_size = 8
+batch_size = 64
 
 # medium ntaGPT model!
 block_size = 1024
@@ -44,9 +44,9 @@ n_layer = 8
 n_head = 8
 n_embd = 768
 
-# Big Boy Run 4:
-max_iters = 190000
-lr_decay_iters = 190000
+# Run 1, changed steps for batch size of 64 ~1 epoch:
+max_iters = 12000
+lr_decay_iters = 12000
 
 # eval stuff
 eval_interval = 1000
