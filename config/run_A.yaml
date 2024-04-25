@@ -8,23 +8,26 @@ n_embd: 1024
 # Training
 pt:
   batch_size: 8
-  max_iters: 12000
+  max_iters: 0
+  epochs: 1
   lr_decay_iters: 12000
   learning_rate: 0.0006
   min_lr: 0.00006
   weight_decay: 0.1
   device: cuda
   compile: True
+  epoch: -1
 
 ft:  
   batch_size: 8
   max_iters: 0
-  lr_decay_iters: 0
-  learning_rate: 0.0006
-  min_lr: 0.00006
+  epochs: 1
+  decay_lr: False
+  learning_rate: 0.00004
   weight_decay: 0.1
   device: cuda
   compile: True
+  epoch: -1
 
 # Eval
 eval_interval: 1000
