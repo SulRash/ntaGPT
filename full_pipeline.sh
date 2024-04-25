@@ -1,9 +1,7 @@
 #!/bin/bash
 
 python NTA/frozenlake_gen.py \
-    --pt_maps 100000000 \
-    --ft_maps 2500000 \
-    --map_size 12
+    config/run_A.yaml
 
 python data/frozenlake/prepare.py \
     --data_path $PWD/generated_data/pt_data.txt \
@@ -14,3 +12,6 @@ python data/frozenlake/prepare.py \
     --mode ft --output_path $PWD/data/frozenlake/
 
 rm -rf generated_data
+
+python train.py config/run_A.yaml pt
+python train.py config/run_A.yaml ft
