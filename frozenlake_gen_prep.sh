@@ -1,8 +1,8 @@
 #!/bin/bash
 
-python NTA/frozen_lake_data.py \
-    --pt_maps 1000 \
-    --ft_maps 1000 \
+python NTA/frozenlake_gen.py \
+    --pt_maps 100000000 \
+    --ft_maps 2500000 \
     --map_size 12
 
 python data/frozenlake/prepare.py \
