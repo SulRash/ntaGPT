@@ -183,8 +183,6 @@ elif init_from == 'resume':
     if mode == 'pretrain':
         iter_num = checkpoint['iter_num']
         best_val_loss = checkpoint['best_val_loss']
-    else:
-        iter_num = 0
 elif init_from.startswith('gpt2'):
     print(f"Initializing from OpenAI GPT-2 weights: {init_from}")
     # initialize from OpenAI GPT-2 weights
