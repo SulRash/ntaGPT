@@ -28,4 +28,6 @@ def tokenizer(string: str):
     return list(map(int, list(string)))
 
 def detokenizer(ids):
-    ''.join([TTM[i] for i in ids])
+    ids = ids.tolist()[0]
+    output = ''.join([TTM[i] for i in ids])
+    return output
