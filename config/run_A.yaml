@@ -1,0 +1,42 @@
+# Model 
+block_size: 2048
+vocab_size: 7
+n_layer: 24
+n_head: 16
+n_embd: 1024
+
+# Training
+pt:
+  batch_size: 8
+  max_iters: 12000
+  lr_decay_iters: 12000
+  learning_rate: 0.0006
+  min_lr: 0.00006
+  weight_decay: 0.1
+  device: cuda
+  compile: True
+
+ft:  
+  batch_size: 8
+  max_iters: 0
+  lr_decay_iters: 0
+  learning_rate: 0.0006
+  min_lr: 0.00006
+  weight_decay: 0.1
+  device: cuda
+  compile: True
+
+# Eval
+eval_interval: 1000
+log_interval: 10
+iters: 50
+
+# Wandb
+wandb_log: True
+wandb_project: ntagent
+wandb_run_name: mediumgpt-fl-r1
+
+# Data
+pt_maps: 100000000
+ft_maps: 2500000
+map_size: 12
