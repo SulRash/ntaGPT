@@ -8,7 +8,10 @@ from utils.frozenlake import tokenizer
 parser = ArgumentParser()
 parser.add_argument('--data_path', type=str)
 parser.add_argument('--mode', type=str, choices=['pt', 'ft'])
+parser.add_argument('--output_path', type=str)
 args = parser.parse_args()
+
+os.makedirs(args.output_path, exist_ok=True)
 
 input_file_path = args.data_path
 
@@ -33,12 +36,12 @@ print(f"val has {len(val_ids):,} tokens")
 # export to bin files
 train_ids = np.array(train_ids, dtype=np.uint16)
 val_ids = np.array(val_ids, dtype=np.uint16)
-train_ids.tofile(os.path.join(os.path.dirname(__file__), f'train_{args.mode}.bin'))
-val_ids.tofile(os.path.join(os.path.dirname(__file__), f'val_{args.mode}.bin'))
+train_ids.tofile(os.path.join(args.output_path, f'train_{args.mode}.bin'))
+val_ids.tofile(os.path.join(args.output_path, f'val_{args.mode}.bin'))
 
 # save the meta information as well, to help us encode/decode later
 meta = {
     'vocab_size': vocab_size
 }
-with open(os.path.join(os.path.dirname(__file__), f'meta_{args.mode}.pkl'), 'wb') as f:
+with open(os.path.join(args.output_path, f'meta_{args.mode}.pkl'), 'wb') as f:
     pickle.dump(meta, f)
