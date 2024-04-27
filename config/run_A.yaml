@@ -8,7 +8,7 @@ n_embd: 1024
 # Training
 pt:
   batch_size: 8
-  max_iters: 20000
+  max_iters: 21000
   epochs: 0
   lr_decay_iters: 12000
   learning_rate: 0.0006
@@ -19,7 +19,7 @@ pt:
 
 ft:  
   batch_size: 8
-  max_iters: 9000
+  max_iters: 10000
   epochs: 0
   decay_lr: False
   learning_rate: 0.00004
