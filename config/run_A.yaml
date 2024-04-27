@@ -10,7 +10,7 @@ pt:
   batch_size: 8
   max_iters: 21000
   epochs: 0
-  lr_decay_iters: 12000
+  lr_decay_iters: 21000
   learning_rate: 0.0006
   min_lr: 0.00006
   weight_decay: 0.1
