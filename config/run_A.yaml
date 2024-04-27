@@ -35,9 +35,29 @@ iters: 50
 # Wandb
 wandb_log: True
 wandb_project: ntagent
-wandb_run_name: smallgpt-fl-r1
+wandb_run_name: mediumgpt-final-fl-r1
 
 # Data
-pt_maps: 100000000
-ft_maps: 2500000
+pt_maps: 10000000
+ft_maps: 250000
 map_size: 12
+# SFHFHFFH<eor>
+# SFFFFFFFFFFF<eor>
+# FFFHFFFFHFFF<eor>
+# FFFFFHFFFFHF<eor>
+# HFFFFFFFFFFH<eor>
+# HFFFFHFFFFFF<eor>
+# FFFFFFFHFFFF<eor>
+# FHHFHFFFFFFF<eor>
+# FFFFFFFFHHFF<eor>
+# FFFFFHHFFFFF<eor>
+# FFFFFFFHFFFF<eor>
+# FFFFFFFFFFFF<eor>
+# FFFFHFFHFFFG<eor>
+# <eom>
+# Sample
+sample:
+  start: "SFHFHFFFFFFH<eor>\nFFFFFFHHFFFF<eor>\nFFFHFFFFHFFF<eor>\nFFFFFHFFFFHF<eor>\nHFFFFFFFFFFH<eor>\nHFFFFHFFFFFF<eor>\nFFFFFFFHFFFF<eor>\nFHHFHFFFFFFF<eor>\nFFFFFFFFHHFF<eor>\nFFFFFHHFFFFF<eor>\nFFFFFFFHFFFF<eor>\nFFFFFFFFFFFF<eor>\nFFFFHFFHFFFG<eor>\n<eom>\n\n"
+  num_samples: 1
+  max_new_tokens: 2048
+  out_dir: out-ntagent-default

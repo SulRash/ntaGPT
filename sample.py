@@ -22,7 +22,19 @@ dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported
 compile = False # use PyTorch 2.0 to compile the model to be faster
 task = 'frozenlake'
 map_size = 6
-exec(open('configurator.py').read()) # overrides from command line or config file
+import yaml
+import sys
+
+map_size = None
+pt_maps = None
+ft_maps = None
+
+with open(sys.argv[1]) as stream:
+    try:
+        config = yaml.safe_load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
+globals().update(config)
 # -----------------------------------------------------------------------------
 
 torch.manual_seed(seed)
