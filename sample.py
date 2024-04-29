@@ -34,7 +34,7 @@ with open(sys.argv[1]) as stream:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
         print(exc)
-globals().update(config)
+globals().update(config['sample'])
 # -----------------------------------------------------------------------------
 
 torch.manual_seed(seed)

@@ -1,0 +1,63 @@
+# Model 
+block_size: 2048
+vocab_size: 7
+n_layer: 24
+n_head: 16
+n_embd: 1024
+
+# Training
+pt:
+  batch_size: 8
+  max_iters: 5000
+  epochs: 0
+  lr_decay_iters: 3000
+  learning_rate: 0.0006
+  min_lr: 0.00006
+  weight_decay: 0.1
+  device: cuda
+  compile: True
+
+ft:  
+  batch_size: 8
+  max_iters: 2500
+  epochs: 0
+  decay_lr: False
+  learning_rate: 0.00005
+  weight_decay: 0.1
+  device: cuda
+  compile: True
+
+# Eval
+eval_interval: 100
+log_interval: 10
+iters: 25
+
+# Wandb
+wandb_log: True
+wandb_project: ntagent
+wandb_run_name: mediumgpt-fl-r2
+
+# Data
+pt_maps: 10000000
+ft_maps: 250000
+map_size: 12
+# SFHFHFFH<eor>
+# SFFFFFFFFFFF<eor>
+# FFFHFFFFHFFF<eor>
+# FFFFFHFFFFHF<eor>
+# HFFFFFFFFFFH<eor>
+# HFFFFHFFFFFF<eor>
+# FFFFFFFHFFFF<eor>
+# FHHFHFFFFFFF<eor>
+# FFFFFFFFHHFF<eor>
+# FFFFFHHFFFFF<eor>
+# FFFFFFFHFFFF<eor>
+# FFFFFFFFFFFF<eor>
+# FFFFHFFHFFFG<eor>
+# <eom>
+# Sample
+sample:
+  start: "SFHFHFFFFFFH<eor>\nFFFFFFHHFFFF<eor>\nFFFHFFFFHFFF<eor>\nFFFFFHFFFFHF<eor>\nHFFFFFFFFFFH<eor>\nHFFFFHFFFFFF<eor>\nFFFFFFFHFFFF<eor>\nFHHFHFFFFFFF<eor>\nFFFFFFFFHHFF<eor>\nFFFFFHHFFFFF<eor>\nFFFFFFFHFFFF<eor>\nFFFFFFFFFFFF<eor>\nFFFFHFFHFFFG<eor>\n<eom>\n\n"
+  num_samples: 1
+  max_new_tokens: 2048
+  out_dir: out-ntagent-default
